@@ -1,5 +1,7 @@
 package exercise1;
 
+import java.util.Scanner;
+
 /**
  * A class that fills a hand of 7 cards with random Card Objects and then asks the user to pick a card.
  * It then searches the array of cards for the match to the user's card. 
@@ -13,15 +15,43 @@ public class CardTrick {
     
     public static void main(String[] args) {
         
+        Scanner scan = new Scanner(System.in);
+        
         Card[] hand = new Card[7];
 
         for (int i = 0; i < hand.length; i++) {
             Card card = new Card();
+            
             //card.setValue(insert call to random number generator here)
+            card.setValue((int)(Math.random()*13));
             // 
             //card.setSuit(Card.SUITS[insert call to random number between 0-3 here])
+            card.setSuit(Card.SUITS[(int)Math.random()*3]);
+            
+            hand[i]=card;
+            
             // Hint: You can use Random -> random.nextInt(n) to get a random number between 0 and n-1 (inclusive)
             //       Don't worry about duplicates at this point
+        }
+
+        // insert code to ask the user for Card value and suit, create their card
+        Card card1 = new Card();
+        
+        
+        System.out.println("Enter a value for the card (0-12): ");
+        card1.setValue(scan.nextInt());
+        System.out.println("Enter a suit for the card (0-3): ");
+        card1.setSuit(Card.SUITS[scan.nextInt()]);
+        
+        for(int i = 0;  i<hand.length; i++){
+            if(card1.getSuit().equals(hand[i].getSuit())){
+                if(card1.getValue()==hand[i].getValue()){
+                    printInfo();
+                }
+            }
+            else{
+                System.out.println("does not match");
+            }
         }
 
         // insert code to ask the user for Card value and suit, create their card
